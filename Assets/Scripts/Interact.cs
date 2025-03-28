@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class Interact : MonoBehaviour
                 heldItemName = "Watermelon";
             }
 
-            if(triggerName == "Stove")
+            if(triggerName == "Stove" || triggerName == "ToastedWatermelon")
             {
                 print("Codey is at the stove and will be incinerated.");
                     
@@ -40,18 +40,24 @@ public class Interact : MonoBehaviour
                     print("Ready to toast.");
                     stove.ToastWatermelon();
                     Destroy(heldItem);
+                   // heldItem.SetActive(false);
+                   heldItemName = "";
+
                 }else{
-                    if(stove.cookedFood == "ToastedWatermelon")
-                    {
-                        stove.ToastedWatermelon.SetActive(false);
+                    print(stove.cookedFood);
+                    print("123");
+                    if(stove.cookedFood == "ToastedWatermelon") 
+                   {
+                       stove.ToastedWatermelon.SetActive(false);
                         Watermelon.SetActive(true);
+                       print("picked up watermelon");
                         heldItem = Instantiate(Watermelon, transform, false);
                         heldItem.transform.localScale = new Vector3(1, 1, 1);
-                        heldItem.transform.localPosition=  gameObject.transform.position + new Vector3(0, 10, 2);
+                       heldItem.transform.position=  gameObject.transform.position + new Vector3(0, 10, 2);
                         heldItemName = "melonSlice";
-                        stove.CleanStove();
-                    }
-                }
+                       stove.CleanStove();
+                   }
+                     }
             }
         } 
     }
@@ -59,7 +65,7 @@ public class Interact : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         triggerName = other.gameObject.name;
-        print(triggerName);
+        // print(triggerName);
     }
         
     void OnTriggerExit(Collider other)
