@@ -50,7 +50,6 @@ public class Interact : MonoBehaviour
                     print("123");
                     if(stove.cookedFood == "ToastedWatermelon" && stove.cook) 
                     {
-                        stove.cook = true;
                         stove.ToastedWatermelon.SetActive(false);
                         Watermelon.SetActive(true);
                         print("picked up watermelon");
