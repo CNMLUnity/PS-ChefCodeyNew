@@ -1,5 +1,6 @@
  using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 
 public class Interact : MonoBehaviour
@@ -10,9 +11,10 @@ public class Interact : MonoBehaviour
     public GameObject heldItem;
     public string heldItemName;
     public Stove stove;
+    public GameObject ServedWatermelon;
     void Start()
     {
-        
+        ServedWatermelon.SetActive(false);
     }
 
     // Update is called once per frame
@@ -46,19 +48,28 @@ public class Interact : MonoBehaviour
                 }else{
                     print(stove.cookedFood);
                     print("123");
-                    if(stove.cookedFood == "ToastedWatermelon") 
-                   {
-                       stove.ToastedWatermelon.SetActive(false);
+                    if(stove.cookedFood == "ToastedWatermelon" && stove.cook) 
+                    {
+                        stove.cook = true;
+                        stove.ToastedWatermelon.SetActive(false);
                         Watermelon.SetActive(true);
-                       print("picked up watermelon");
+                        print("picked up watermelon");
                         heldItem = Instantiate(Watermelon, transform, false);
+                        heldItemName = "ToastedWatermelon";
                         heldItem.transform.localScale = new Vector3(1, 1, 1);
-                       heldItem.transform.position=  gameObject.transform.position + new Vector3(0, 10, 2);
-                        heldItemName = "melonSlice";
-                       stove.CleanStove();
-                   }
-                     }
+                        heldItem.transform.position=  gameObject.transform.position + new Vector3(0, 10, 2);
+                        stove.CleanStove();
+                    }
+                }
+            }    
+            if(triggerName == "Plate" && heldItemName == "ToastedWatermelon")
+            {
+                print("Ready to serve.");
+                Destroy(heldItem);
+                ServedWatermelon.SetActive(true);
             }
+ 
+            
         } 
     }
 
