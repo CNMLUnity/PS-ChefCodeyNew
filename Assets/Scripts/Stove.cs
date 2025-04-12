@@ -28,26 +28,28 @@ public class Stove : MonoBehaviour
         ToastedWatermelon.SetActive(true);
         cookedFood = "ToastedWatermelon";
         print("Toast Watermelon was called");
-        Invoke("CompleteCooking", 5f);
+        Invoke("CompleteCooking", 10f);
     }
 
        public void ServeWatermelon()
     {
         //print("Toast Watermelon was called");
         ServedWatermelon.SetActive(true);
-        print("Toast Watermelon was called");
+        // print("Toast Watermelon was called");
     }
 
     public void CleanStove()
     {
-        print("FJIAFHAFH");
+        // print("FJIAFHAFH");
         interact.heldItem.SetActive(true);
         cookedFood = "";
         complete.Stop();
+        cook = false;
     }
 
     public void CompleteCooking()
     {
+        print("sigma"); 
         smoke.Stop();
         complete.Play();
         cook = true;
